@@ -1,54 +1,24 @@
-﻿using Laboratorio10;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Laboratorio10.Controllers;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Web.Mvc;
 
-namespace Laboratorio10.Tests.Controllers
+namespace UnitTestLab10.Controllers
 {
     [TestClass]
     public class HomeControllerTest
     {
         [TestMethod]
-        public void Index()
+        public void ContactSendValuesTest()
         {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
-            ViewResult result = controller.Index() as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
-        }
-
-        [TestMethod]
-        public void About()
-        {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
-            ViewResult result = controller.About() as ViewResult;
-
-            // Assert
-            Assert.AreEqual("Your application description page.", result.ViewBag.Message);
-        }
-
-        [TestMethod]
-        public void Contact()
-        {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
-            ViewResult result = controller.Contact() as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
+            //Arrange
+            HomeController homeController = new HomeController();
+            //Act
+            ViewResult vista = homeController.Contact() as ViewResult;
+            //Assert
+            Assert.IsNotNull(vista);
+            Assert.AreEqual("Contact", vista.ViewName);
+            Assert.AreEqual("Your contact page.", vista.ViewBag.Message);
+            Assert.AreEqual(1, vista.ViewBag.ValorParaTest);
         }
     }
 }

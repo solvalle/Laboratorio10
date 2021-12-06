@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Planetas";
+}
+<h1>Listado de planetas</h1>
+
+@foreach (var planeta in ViewBag.planetas)
+{
+    <hr />
+    <h4> <strong> Ficha del planeta: </strong> @planeta.id </h4>
+    <p>
+        Nombre: @planeta.nombre <br />
+        Tipo: @planeta.tipo <br />
+        Número de anillos: @planeta.numeroAnillos <br />
+    </p>
+    @Html.ActionLink("Modificar información", "editarPlaneta",
+    new { identificador = planeta.id },
+   new
+   {
+       @class = "btn btn alert-info",
+       @onclick = "return confirm('¿Quiere modificar este planeta ? ');"
+   }
+ )
+    <hr />
+}
+

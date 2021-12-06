@@ -1,0 +1,82 @@
+﻿@model Laboratorio10.Models.PlanetaModel
+@{
+    ViewBag.Title = "Crear Planeta";
+    List<SelectListItem> tiposPlanetas = new List<SelectListItem>() { new
+SelectListItem { Text = "Rocoso" }, new SelectListItem { Text = "Gaseoso" }, new
+SelectListItem { Text = "Enano" } };
+} 
+<html>
+<head>
+
+</head>
+
+<body>
+    @if (ViewBag.Message != null)
+    {
+        if (ViewBag.ExitoAlCrear)
+        {
+            <div class="alert-success">
+                <h3> @ViewBag.Message </h3>
+            </div>
+        }
+        else
+        {
+            <div class="alert-danger">
+                <h3> @ViewBag.Message </h3>
+            </div>
+        }
+    } 
+    @using (Html.BeginForm("crearPlaneta", "Planetas", FormMethod.Post, new {
+    enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <h1>Formulario de creación de planetas</h1>
+        <div class="form-horizontal">
+            <div class="form-group">
+                @Html.LabelFor(model => model.nombre)
+                @Html.TextBoxFor(model => model.nombre, new { @class = "formcontrol" })
+                @Html.ValidationMessageFor(model => model.nombre, "", new
+                {
+                @class = "text-danger"
+                })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.tipo)
+                @Html.DropDownListFor(model => model.tipo, tiposPlanetas, "-Sin selección - ", new { @class = "form - control" })
+                @Html.ValidationMessageFor(model => model.tipo, "", new 
+                { 
+                @class = "text-danger" 
+                })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.archivo)
+                @Html.TextBoxFor(model => model.archivo, new
+                {
+                    type = "file",
+                    @class = "btn btn alert-info"
+                })
+                @Html.ValidationMessageFor(model => model.archivo, "", new
+                {
+                @class = "text-danger"
+                })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.numeroAnillos)
+                @Html.TextBoxFor(model => model.numeroAnillos, new
+                {
+                    @class =
+                "form-control"
+                })
+                @Html.ValidationMessageFor(model => model.numeroAnillos, "", new
+                {
+                @class = "text-danger"
+                })
+            </div>
+            <input type="submit" class="btn btn-success" value="Crear" />
+        </div>
+    }
+</body>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+</html>
